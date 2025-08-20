@@ -20,11 +20,13 @@ public class PublishersController {
     private PublisherRepository repository;
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<Publisher> getAll() {
         return this.repository.findAll();
     }
 
     @GetMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Publisher getAll(@PathVariable int id) {
         return this.repository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "not found")

@@ -20,15 +20,24 @@ public class BooksController {
     private BookRepository repository;
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<Book> getAll() {
         return this.repository.findAll();
     }
 
     @GetMapping("{id}")
-    public Book getAll(@PathVariable int id) {
-        return this.repository.findById(id).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "not found")
+    public ResponseEntity<Book> getAll(@PathVariable int id) {
+        return new ResponseEntity<>(
+                this.repository.findById(id).orElseThrow(
+                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "not found")
+                ), HttpStatus.OK
+
+
         );
+
+//                this.repository.findById(id).orElseThrow(
+//                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "not found")
+//        );
     }
 
     @PostMapping

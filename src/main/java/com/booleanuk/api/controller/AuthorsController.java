@@ -20,11 +20,13 @@ public class AuthorsController {
     private AuthorRepository repository;
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<Author> getAll() {
         return this.repository.findAll();
     }
 
     @GetMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Author getAll(@PathVariable int id) {
         return this.repository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "not found")
