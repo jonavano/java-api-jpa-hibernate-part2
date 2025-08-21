@@ -24,7 +24,7 @@ public class Publisher {
     @Column
     private String location;
 
-    @OneToMany(mappedBy = "publisher")
+    @OneToMany(mappedBy = "publisher", fetch = FetchType.EAGER)
     @JsonIgnoreProperties({"publisher_id"})
     private List<Book> books;
 
